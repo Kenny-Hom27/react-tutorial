@@ -1,5 +1,23 @@
 body {
-  background-color: #eee;
+  background-color: gray;
+}
+
+input[type=text] {
+    width: 50%;
+    padding: 6px 6px;
+    margin: 4px 0;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: blue;
+    border: none;
+    color: white;
+    font-size: 26px;
+}
+
+button:hover {
+  background-color: red;
 }
 
 .clicked {
@@ -12,4 +30,50 @@ body {
 
 .imagetest {
   background: url('../../assets/cyberman.jpg');
+}
+
+.wsjHeader {
+  text-align: center;
+}
+
+.searchBar {
+  text-align: center;
+}
+
+.individualArticle {
+  text-align: center;
+  float: left;
+  margin: 20px;
+  border: 1px solid white;
+  padding: 5px;
+  width: 300px;
+  height: 300px;
+}
+
+.individualArticle:hover {
+  background: black;
+}
+
+.articleHeader {
+  text-align: center;
+  color: white;
+}
+
+.articleSummary {
+  color: white;
+}
+
+.allArticles {
+  display: block;
+  margin-left: 100px;
+}
+
+.articleImage {
+  animation: articleImage-spin infinite 30s linear;
+  border-radius: 200px;
+}
+
+@keyframes articleImage-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }

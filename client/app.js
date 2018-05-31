@@ -2,48 +2,26 @@ import React, { Component } from 'react';
 
 //import any other components here
 import HelloWorld from '../src/helloworld';
-
-//import CSS here, so webpack knows to include in bundle
-import style from '../client/style/main.css';
-
-//this is the component that generates the body of the page
-class App extends Component {
-
-  render() {
-    return (
-      <div>
-        <HelloWorld />
-      </div>
-    );
-  }
-}
-
-export default App;
-
-/* STEP 2, MORE COMPLICATED CODE FOLLOWS:
-
-import React, { Component } from 'react';
-
-//import any other components here
-import HelloWorld from '../src/helloworld';
 import Article from '../src/article';
+import SearchBar from '../src/searchbar';
 
 //import CSS here, so webpack knows to include in bundle
 import style from '../client/style/main.css';
 
 //this is the component that generates the body of the page
 class App extends Component {
-  constructor() {
+  constructor(props) {
     super(props);
 
-    this.toggle = this.toggle.bind(this);
-
+    // this.toggleSummaries = this.toggleSummaries.bind(this);
+    // this.moveTopThreeArticles = this.moveTopThreeArticles.bind(this)
     //default state
     //this keeps track of "live" data on the browser
     this.state = {
       articles: null,
       error: null,
-      loaded: false
+      loaded: false,
+      searchTerm: ""
     };
   }
 
@@ -71,17 +49,42 @@ class App extends Component {
   }
 
   //click handler for button
-  toggle() {
-    console.log('toggle button clicked');
+  toggleSummaries() {
+    // this.setState((prevState, props) => ({
+    //   showSummaries: !prevState.showSummaries
+    // }))
+    this.setState({
+      showSummaries: !this.state.showSummaries
+    })
+  }
+
+  moveTopFourArticles = () => {
+    let tempArticles = [...this.state.articles]
+    tempArticles = tempArticles.slice(4).concat(tempArticles.slice(0,4))
+
+    this.setState({
+      articles: tempArticles
+    })
+  }
+
+  searchArticles = (articles) => {
+    return articles.filter(article => {
+      return this.downcaseTitle(article.headline).includes(this.state.searchTerm)
+    })
+  }
+
+  downcaseTitle = (word) => {
+    return word.split(" ").map(w => w.toLowerCase()).join(" ")
+  }
+
+  getSearchTerm = (event) => {
+    this.setState({
+      searchTerm: event.target.value
+    })
   }
 
   render() {
-    const {loaded, error, articles} = this.state;
-    //  code above is equal to this:
-    //  const loaded = this.state.loaded;
-    //  const error = this.state.error;
-    //  const articles = this.state.articles;
-
+    const {loaded, error, articles, showSummaries, searchTerm} = this.state;
     if (error) {
       //render this when there's error getting data
       return <div>Sorry! Something went wrong</div>
@@ -91,28 +94,27 @@ class App extends Component {
     } else {
       //render articles
       let articleJSX = [];
-
-      articles.map((article, idx) => {
+      let searchedArticles = this.searchArticles(articles) || []
+      searchedArticles.map((article, idx) => {
         articleJSX.push(
           <Article
             key={idx}
-            headline={article.headline}
+            article={article}
           />
         );
       });
-      // code above is equal to this:
-      // for (let i = 0; i < articles.length; i++) {
-      //   articleJSX.push(
-      //     <Article key={i} headline={articles[i].headline}></Article>
-      //   );
-      // }
+
 
       return (
         <div>
-          <button onClick={this.toggle}>Toggle Something</button>
-          <HelloWorld />
-          <HelloWorld message="Hi!" />
-          {articleJSX}
+          <h1 className="wsjHeader"><img src='assets/wsj-logo.svg' /></h1>
+          <div className="searchBar">
+            <SearchBar getSearchTerm={this.getSearchTerm}/>
+            <button className="shiftArticles" onClick={this.moveTopFourArticles}>Shift Articles</button>
+          </div>
+          <div className="allArticles">
+            {articleJSX}
+          </div>
         </div>
       );
 
@@ -121,4 +123,3 @@ class App extends Component {
 }
 
 export default App;
-*/

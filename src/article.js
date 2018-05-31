@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 
 //Basic Article Component
 class Article extends Component {
-  constructor() {
+  constructor(props) {
     super(props);
 
     //initial state
-    this.state = {};
+    this.state = {
+      showImage: true
+    };
   }
 
   //Component Lifecycle
@@ -46,14 +48,26 @@ class Article extends Component {
     console.log('component will unmount');
   }
 
-  //this fires every time a prop or state changes
-  //to use any prop, use this.props.NAME_OF_PROP
-  //use {} to add JS expressions
-  //use className to add CSS classes
-  //remember that this is not HTML!!
-  //https://reactjs.org/docs/introducing-jsx.html
+  changeImageToSummary = () => {
+    this.setState({
+      showImage: !this.state.showImage
+    })
+  }
+
   render() {
-    return <div>Hello World</div>;
+    const { headline, image, summary } = this.props.article
+    let newImage;
+    if (!image) {
+      newImage = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png'
+    }
+    let displayImage = <img className="articleImage" src={image ? image : newImage} alt="img" width="200px" height="200px"/>
+    let displaySummary = <div className="articleSummary">{summary}</div>
+    return (
+      <div className="individualArticle" onClick={this.changeImageToSummary}>
+       <h4 className="articleHeader">{headline}</h4>
+       {this.state.showImage ? displayImage : displaySummary}
+     </div>
+    )
   }
 };
 

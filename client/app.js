@@ -19,7 +19,8 @@ class App extends Component {
       error: null,
       loaded: false,
       searchTerm: "",
-      selectCategory: "All"
+      selectCategory: "All",
+      spin: false
     };
   }
 
@@ -65,6 +66,12 @@ class App extends Component {
     })
   }
 
+  makeItSpin = () => {
+    this.setState({
+      spin: !this.state.spin
+    })
+  }
+
   searchArticles = (articles) => {
     return articles.filter(article => {
       return this.downcaseTitle(article.headline).includes(this.state.searchTerm)
@@ -104,7 +111,7 @@ class App extends Component {
   }
 
   render() {
-    const {loaded, error, articles, showSummaries, searchTerm} = this.state;
+    const {loaded, error, articles, showSummaries, searchTerm, spin} = this.state;
     if (error) {
       //render this when there's error getting data
       return <div>Sorry! Something went wrong</div>
@@ -123,6 +130,7 @@ class App extends Component {
           <Article
             key={idx}
             article={article}
+            spin={spin}
           />
         );
       });
@@ -135,6 +143,7 @@ class App extends Component {
             <Categories className="categories" selectCategory={this.selectCategory}/>
             <div className="searchBar"><SearchBar getSearchTerm={this.getSearchTerm}/></div>
             <button className="shiftArticles" onClick={this.moveTopFourArticles}>Shift Articles</button>
+            <button className="spinImages" onClick={this.makeItSpin}>Spin Articles</button>
           </div>
           <div className="allArticles">
             {articleJSX}

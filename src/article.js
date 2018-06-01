@@ -7,7 +7,7 @@ class Article extends Component {
 
     //initial state
     this.state = {
-      showImage: true
+      showImage: true,
     };
   }
 
@@ -58,13 +58,18 @@ class Article extends Component {
     window.open(this.props.article.share_link)
   }
 
+
+
   render() {
+    const { showImage } = this.state
     const { headline, image, summary } = this.props.article
+    const { spin } = this.props
+    console.log(spin)
     let newImage;
     if (!image) {
       newImage = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png'
     }
-    let displayImage = <div className="articleImage" >
+    let displayImage = <div className={spin ? "articleSpin" : "articleImage"} >
                         <img src={image ? image : newImage} alt="img" width="200px" height="200px"/>
                        </div>
     let displaySummary = <div className="articleSummary">
@@ -76,7 +81,7 @@ class Article extends Component {
     return (
       <div className="individualArticle" onClick={this.changeImageToSummary}>
        <h3 className="articleHeader">{headline}</h3>
-       {this.state.showImage ? displayImage : displaySummary}
+       {showImage ? displayImage : displaySummary}
      </div>
     )
   }

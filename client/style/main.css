@@ -15,6 +15,7 @@ button {
     border: none;
     color: black;
     font-size: 26px;
+    margin-right: 10px;
 }
 
 button:hover {
@@ -68,7 +69,7 @@ button:hover {
   margin-left: -5px;
   border-top: 2px double white;
   border-bottom: 2px double white;
-  margin-top: 10px;
+  margin-top: 5px;
   margin-bottom: 20px;
 }
 
@@ -100,12 +101,13 @@ button:hover {
   margin-bottom: 10px;
 }
 
-/* .articleImage {
-  animation: articleImage-spin infinite 30s linear;
-  border-radius: 200px;
+.articleImage img {
+  animation: articleImage infinite 30s linear;
+  border-radius: 100%;
+  margin-bottom: 10px;
 }
 
-@keyframes articleImage-spin {
+@keyframes articleImage {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
-} */
+}

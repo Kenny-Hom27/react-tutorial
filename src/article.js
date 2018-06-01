@@ -26,27 +26,27 @@ class Article extends Component {
   */
 
 
-  static getDerivedStateFromProps(props, state) {
-    console.log('get derived state from props');
-    return null;
-  }
-
-  componentDidMount() {
-    console.log('component did mount');
-  }
-  shouldComponentUpdate() {
-    return true;
-  }
-  getSnapshotBeforeUpdate(prevProps, prevState){
-    console.log('get snapshot before update');
-    return { foo: 'bar' };
-  }
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    console.log('component did update');
-  }
-  componentWillUnmount() {
-    console.log('component will unmount');
-  }
+  // static getDerivedStateFromProps(props, state) {
+  //   console.log('get derived state from props');
+  //   return null;
+  // }
+  //
+  // componentDidMount() {
+  //   console.log('component did mount');
+  // }
+  // shouldComponentUpdate() {
+  //   return true;
+  // }
+  // getSnapshotBeforeUpdate(prevProps, prevState){
+  //   console.log('get snapshot before update');
+  //   return { foo: 'bar' };
+  // }
+  // componentDidUpdate(prevProps, prevState, snapshot) {
+  //   console.log('component did update');
+  // }
+  // componentWillUnmount() {
+  //   console.log('component will unmount');
+  // }
 
   changeImageToSummary = () => {
     this.setState({

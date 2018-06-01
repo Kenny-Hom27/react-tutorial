@@ -68,7 +68,11 @@ button:hover {
   margin-left: 100px;
 }
 
-.articleImage {
+.categoryLabel {
+  margin-left: 20px;
+}
+
+/* .articleImage {
   animation: articleImage-spin infinite 30s linear;
   border-radius: 200px;
 }
@@ -76,4 +80,4 @@ button:hover {
 @keyframes articleImage-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
-}
+} */

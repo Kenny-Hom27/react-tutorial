@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import HelloWorld from '../src/helloworld';
 import Article from '../src/article';
 import SearchBar from '../src/searchbar';
+import Categories from '../src/categories';
 
 //import CSS here, so webpack knows to include in bundle
 import style from '../client/style/main.css';
@@ -13,15 +14,12 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    // this.toggleSummaries = this.toggleSummaries.bind(this);
-    // this.moveTopThreeArticles = this.moveTopThreeArticles.bind(this)
-    //default state
-    //this keeps track of "live" data on the browser
     this.state = {
       articles: null,
       error: null,
       loaded: false,
-      searchTerm: ""
+      searchTerm: "",
+      selectCategory: "All"
     };
   }
 
@@ -83,6 +81,28 @@ class App extends Component {
     })
   }
 
+  selectCategory = (event) => {
+    this.setState({
+      selectCategory: event.target.value
+    })
+  }
+
+  categorizeArticles = (articles) => {
+    let topCategories = ["Markets", "Mobile", "Politics", "Tech", "Business", "Life"]
+
+    if (this.state.selectCategory === "All") return articles
+
+    if (this.state.selectCategory === "Other") {
+      return articles.filter(article => {
+        return !topCategories.includes(article.category)
+      })
+    }
+
+    return articles.filter(article => {
+      return article.category === this.state.selectCategory
+    })
+  }
+
   render() {
     const {loaded, error, articles, showSummaries, searchTerm} = this.state;
     if (error) {
@@ -94,7 +114,10 @@ class App extends Component {
     } else {
       //render articles
       let articleJSX = [];
-      let searchedArticles = this.searchArticles(articles) || []
+
+      let categorizedArticles = this.categorizeArticles([...articles])
+      let searchedArticles = this.searchArticles(categorizedArticles)
+
       searchedArticles.map((article, idx) => {
         articleJSX.push(
           <Article
@@ -109,6 +132,7 @@ class App extends Component {
         <div>
           <h1 className="wsjHeader"><img src='assets/wsj-logo.svg' /></h1>
           <div className="searchBar">
+            <Categories selectCategory={this.selectCategory}/>
             <SearchBar getSearchTerm={this.getSearchTerm}/>
             <button className="shiftArticles" onClick={this.moveTopFourArticles}>Shift Articles</button>
           </div>

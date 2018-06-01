@@ -131,9 +131,9 @@ class App extends Component {
       return (
         <div>
           <h1 className="wsjHeader"><img src='assets/wsj-logo.svg' /></h1>
-          <div className="searchBar">
-            <Categories selectCategory={this.selectCategory}/>
-            <SearchBar getSearchTerm={this.getSearchTerm}/>
+          <div className="filterBar">
+            <Categories className="categories" selectCategory={this.selectCategory}/>
+            <div className="searchBar"><SearchBar getSearchTerm={this.getSearchTerm}/></div>
             <button className="shiftArticles" onClick={this.moveTopFourArticles}>Shift Articles</button>
           </div>
           <div className="allArticles">

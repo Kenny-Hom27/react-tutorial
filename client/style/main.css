@@ -6,18 +6,20 @@ input[type=text] {
     width: 50%;
     padding: 6px 6px;
     margin: 4px 0;
+    font-size: 20px;
     box-sizing: border-box;
 }
 
 button {
-    background-color: blue;
+    background-color: white;
     border: none;
-    color: white;
+    color: black;
     font-size: 26px;
 }
 
 button:hover {
-  background-color: red;
+  background-color: black;
+  color: white;
 }
 
 .clicked {
@@ -36,8 +38,12 @@ button:hover {
   text-align: center;
 }
 
-.searchBar {
+.filterBar {
   text-align: center;
+}
+
+.searchBar {
+  margin: 20px 0 20px 0;
 }
 
 .individualArticle {
@@ -48,6 +54,7 @@ button:hover {
   padding: 5px;
   width: 300px;
   height: 300px;
+  position: relative;
 }
 
 .individualArticle:hover {
@@ -57,6 +64,12 @@ button:hover {
 .articleHeader {
   text-align: center;
   color: white;
+  width: 310px;
+  margin-left: -5px;
+  border-top: 2px double white;
+  border-bottom: 2px double white;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 .articleSummary {
@@ -64,12 +77,27 @@ button:hover {
 }
 
 .allArticles {
-  display: block;
-  margin-left: 100px;
+  margin-left: 120px;
 }
 
 .categoryLabel {
   margin-left: 20px;
+}
+
+.moreInfoButton {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin-bottom: 20px;
+}
+
+.articleImage {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin-bottom: 10px;
 }
 
 /* .articleImage {

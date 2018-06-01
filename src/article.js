@@ -54,17 +54,28 @@ class Article extends Component {
     })
   }
 
+  openLink = () => {
+    window.open(this.props.article.share_link)
+  }
+
   render() {
     const { headline, image, summary } = this.props.article
     let newImage;
     if (!image) {
       newImage = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/600px-No_image_available.svg.png'
     }
-    let displayImage = <img className="articleImage" src={image ? image : newImage} alt="img" width="200px" height="200px"/>
-    let displaySummary = <div className="articleSummary">{summary}</div>
+    let displayImage = <div className="articleImage" >
+                        <img src={image ? image : newImage} alt="img" width="200px" height="200px"/>
+                       </div>
+    let displaySummary = <div className="articleSummary">
+                          {summary}
+                          <div className="moreInfoButton">
+                            <button onClick={this.openLink}>More Info</button>
+                          </div>
+                        </div>
     return (
       <div className="individualArticle" onClick={this.changeImageToSummary}>
-       <h4 className="articleHeader">{headline}</h4>
+       <h3 className="articleHeader">{headline}</h3>
        {this.state.showImage ? displayImage : displaySummary}
      </div>
     )
